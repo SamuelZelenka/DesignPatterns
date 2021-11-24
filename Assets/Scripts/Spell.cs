@@ -11,10 +11,3 @@ public abstract class Spell
         _spellModules = modules;
     }
 }
-
-public abstract class SpellModule
-{
-
-
-
-}
