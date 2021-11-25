@@ -5,34 +5,27 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
+[Flags]
+public enum SpellElements
+{
+    Earth = 1 << 0,
+    Wind = 1 << 1,
+    Fire = 1 << 2,
+    Water = 1 << 3
+}
+
 public class SpellFactory
 {
-    private static HashSet<Type> spellModules;
-    private static bool isInitialized => spellModules != null;
+    private static Dictionary<int, Spell> spells;
+    private static bool isInitialized => spells != null;
 
     public static void InitializeFactory()
     {
-        if (isInitialized)
-        {
-            return;
-        }
-
-        Type[] spellModuleTypes = Assembly.GetAssembly(typeof(SpellModule)).GetTypes();
-        IEnumerable applicableSpellModules = spellModuleTypes.Where(IsModuleApplicable);
         
-        foreach (Type module in applicableSpellModules)
-        {
-            spellModules.Add(module);
-        }
     }
 
-    private static bool IsModuleApplicable(Type module)
+    public static Spell GetSpell(byte spell)
     {
-        return module.IsClass && !module.IsAbstract && module.IsSubclassOf(typeof(SpellModule));
-    }
-    
-    public static Spell GetSpell<SpellType>() where SpellType : Spell
-    {
-        
+        return spells[spell];
     }
 }
