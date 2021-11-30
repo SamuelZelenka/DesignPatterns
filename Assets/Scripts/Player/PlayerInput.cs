@@ -22,7 +22,7 @@ public class PlayerInput : MonoBehaviour
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         InputAction[] actions = new InputAction[6]
         {
-         new ClickToMoveAction(agent, Camera.main),
+         new MoveToPointAction(agent, MouseClickPos()),
          new SelectElementAction(0, KeyCode.Alpha1 , selectionUI),
          new SelectElementAction(1, KeyCode.Alpha2 , selectionUI),
          new SelectElementAction(2, KeyCode.Alpha3, selectionUI),
@@ -34,5 +34,25 @@ public class PlayerInput : MonoBehaviour
         {
             _inputActions.Add(actions[i]);
         }
+    }
+    
+    private static Camera _mainCamera;
+    private static Camera MainCamera
+    {
+        get
+        {
+            _mainCamera = _mainCamera != null ? _mainCamera : Camera.main;
+            return _mainCamera;
+        }
+    }
+
+    public static Vector3 MouseClickPos()
+    {
+        RaycastHit hit;
+        Ray mouseToWorldRay = MainCamera.ScreenPointToRay(Input.mousePosition);
+
+        Physics.Raycast(mouseToWorldRay, out hit);
+
+        return hit.point;
     }
 }

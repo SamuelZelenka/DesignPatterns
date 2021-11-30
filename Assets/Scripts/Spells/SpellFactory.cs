@@ -53,8 +53,7 @@ public class SpellFactory : MonoBehaviour
         return Spells.ContainsKey((byte) spell) ? Spells[(byte) spell] : new GenericSpell();
     }
 
-    //public static GameObject CreateSpellObject()
-    //{
-
-    //}
+    public static GameObject CreateSpellObject()
+    {
+    }
 }

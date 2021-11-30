@@ -1,3 +1,6 @@
+using System.Collections;
+using UnityEngine;
+
 public class FireBall : Spell
 {
     private const byte FIREBALL_RECIPE = (byte)(SpellElements.Fire);
@@ -7,8 +10,18 @@ public class FireBall : Spell
         return "Cast Fireball";
     }
 
-    public FireBall()
+    public override void Activate(SpellObject spellObject)
     {
+        throw new System.NotImplementedException();
+    }
 
+    public override void Update()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void DeActivate()
+    {
+        throw new System.NotImplementedException();
     }
 }
