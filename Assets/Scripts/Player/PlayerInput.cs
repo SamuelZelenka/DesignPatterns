@@ -4,8 +4,9 @@ using UnityEngine.AI;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] private ElementSelection selectionUI;
+    [SerializeField] private ElementSelection elementSelection;
     private HashSet<InputAction> _inputActions = new HashSet<InputAction>();
+
     private void Start()
     {
         CreateInputKeys();
@@ -20,14 +21,15 @@ public class PlayerInput : MonoBehaviour
     private void CreateInputKeys()
     {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        InputAction[] actions = new InputAction[6]
+        InputAction[] actions = new InputAction[]
         {
-         new MoveToPointAction(agent, MouseClickPos()),
-         new SelectElementAction(0, KeyCode.Alpha1 , selectionUI),
-         new SelectElementAction(1, KeyCode.Alpha2 , selectionUI),
-         new SelectElementAction(2, KeyCode.Alpha3, selectionUI),
-         new SelectElementAction(3, KeyCode.Alpha4, selectionUI),
-         new ResetElementsAction(selectionUI)
+         new MoveToPointAction(agent),
+         new SelectElementAction(0, KeyCode.Alpha1 , elementSelection),
+         new SelectElementAction(1, KeyCode.Alpha2 , elementSelection),
+         new SelectElementAction(2, KeyCode.Alpha3, elementSelection),
+         new SelectElementAction(3, KeyCode.Alpha4, elementSelection),
+         new ResetElementsAction(elementSelection),
+         new CastSpellAction(elementSelection, () => Input.GetMouseButtonDown(0))
         };
 
         for (int i = 0; i < actions.Length; i++)
@@ -52,7 +54,6 @@ public class PlayerInput : MonoBehaviour
         Ray mouseToWorldRay = MainCamera.ScreenPointToRay(Input.mousePosition);
 
         Physics.Raycast(mouseToWorldRay, out hit);
-
         return hit.point;
     }
 }

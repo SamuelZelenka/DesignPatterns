@@ -5,7 +5,6 @@ using UnityEngine.UIElements;
 
 public class GenericSpell : Spell
 {
-
     private Vector3 _clickedPos;
     
     public override byte SpellRecipe { get; }
@@ -16,7 +15,7 @@ public class GenericSpell : Spell
 
     public override void Activate(SpellObject spellObject)
     {
-        _clickedPos = ;
+        _clickedPos = PlayerInput.MouseClickPos();
     }
 
     public override void Update()

@@ -8,18 +8,21 @@ using UnityEngine;
 [Flags]
 public enum SpellElements
 {
-    Water = 0b0001,
-    Earth = 0b0010,
-    Fire = 0b0100,
-    Air = 0b1000
+    Water = 1 << 0,
+    Earth = 1 << 1,
+    Fire = 1 << 2,
+    Air = 1 << 3
 }
 
 public class SpellFactory : MonoBehaviour
 {
-    private readonly Dictionary<byte, Spell> _spells = new Dictionary<byte, Spell>();
-    private bool IsInitialized => _spells.Count > 0;
+    [SerializeField] private SpellObject spellObjectPrefab;
+    private static SpellFactory _instance;
+   
+    private static readonly Dictionary<byte, Spell> _spells = new Dictionary<byte, Spell>();
+    private static bool IsInitialized => _spells.Count > 0;
 
-    private Dictionary<byte, Spell> Spells
+    private static Dictionary<byte, Spell> Spells
     {
         get
         {
@@ -31,7 +34,19 @@ public class SpellFactory : MonoBehaviour
         }
     }
 
-    public void InitializeFactory()
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public static void InitializeFactory()
     {
         Assembly typeAssembly = Assembly.GetAssembly(typeof(Spell));
         IEnumerable spellTypes = typeAssembly.GetTypes().Where(IsDerivedType<Spell>);
@@ -43,17 +58,20 @@ public class SpellFactory : MonoBehaviour
         }
     }
 
-    private bool IsDerivedType<T>(Type type)
+    private static bool IsDerivedType<T>(Type type)
     {
         return type.IsClass && !type.IsAbstract && type.IsSubclassOf(typeof(T));
     }
 
-    public Spell GetSpell(SpellElements spell)
+    private static Spell GetSpell(SpellElements spell)
     {
         return Spells.ContainsKey((byte) spell) ? Spells[(byte) spell] : new GenericSpell();
     }
 
-    public static GameObject CreateSpellObject()
+    public static SpellObject CreateSpellObject(SpellElements spell)
     {
+        SpellObject newSpellObject = Instantiate(_instance.spellObjectPrefab);
+        newSpellObject.SetActiveSpell(GetSpell(spell));
+        return newSpellObject;
     }
 }

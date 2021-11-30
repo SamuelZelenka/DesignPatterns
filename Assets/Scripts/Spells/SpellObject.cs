@@ -3,15 +3,25 @@ using UnityEngine;
 
 public class SpellObject : MonoBehaviour
 {
-    private Task updateCourotine;
     private Spell _activeSpell;
     private bool _isActive;
 
+    public void SetActiveSpell(Spell spell)
+    {
+        _activeSpell = spell;
+    }
+    private void Initiate(Vector3 position, Spell spell)
+    {
+        transform.position = position;
+        _activeSpell = spell;
+        Activate();
+    }
     public void Activate()
     {
         _isActive = true;
         _activeSpell.Activate(this);
         _activeSpell.OnDeactivate += () => _isActive = false;
+        print(_activeSpell.SpellMessage());
         UpdateSpell();
     }
 
@@ -21,5 +31,6 @@ public class SpellObject : MonoBehaviour
         {
             _activeSpell.Update();
         }
+        print("Ended");
     }
 }

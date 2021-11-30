@@ -3,19 +3,17 @@ using UnityEngine.AI;
 
 public class MoveToPointAction : InputAction
 {
-    private Vector3 _point;
     private NavMeshAgent _agent;
 
-    protected override bool IsPressed => Input.GetMouseButton(0);
+    protected override bool IsPressed => Input.GetMouseButton(1);
 
-    public MoveToPointAction(NavMeshAgent agent, Vector3 clickedPos)
+    public MoveToPointAction(NavMeshAgent agent)
     {
         _agent = agent;
-        _point = clickedPos;
     }
 
     protected override void Execute()
     {
-        _agent.SetDestination(_point);
+        _agent.SetDestination(PlayerInput.MouseClickPos());
     }
 }
