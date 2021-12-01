@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class SelectElementAction : InputAction
 {
-
     private int _elementID;
     private ElementSelection _selectionUI;
     private KeyCode _keyCode;
@@ -20,10 +19,5 @@ public class SelectElementAction : InputAction
     protected override void Execute()
     {
         _selectionUI.SetElementActiveState(_elementID, true);
-    }
-
-    public override void RebindKey(KeyCode keycode)
-    {
-        _keyCode = keycode;
     }
 }

@@ -1,24 +1,27 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CastSpellAction : InputAction
 {
     private ElementSelection _elementSelection;
     private Func<bool> _onClicked;
+    private Transform playerTransform;
     protected override bool IsPressed => _onClicked.Invoke();
 
-    public CastSpellAction(ElementSelection elementSelection, Func<bool> onClicked)
+    public CastSpellAction(ElementSelection elementSelection, Func<bool> onClicked, Transform player)
     {
         _elementSelection = elementSelection;
         _onClicked = onClicked;
-}
+        playerTransform = player.transform;
+    }
 
     protected override void Execute()
     {
         SpellElements selectedElements = (SpellElements)_elementSelection.SelectedElements;
-        SpellObject spellObject = SpellFactory.CreateSpellObject(selectedElements);
-        spellObject.Activate();
+        Vector3 spellPosition = playerTransform.position;
+        Vector3 spellDirection =  PlayerInput.MouseClickPos() - spellPosition;
+        Quaternion spellRotation = Quaternion.LookRotation(spellDirection, Vector3.up);
+        
+        SpellFactory.CreateSpellObject(selectedElements, spellPosition, spellRotation);
     }
 }

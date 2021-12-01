@@ -14,11 +14,8 @@ public enum SpellElements
     Air = 1 << 3
 }
 
-public class SpellFactory : MonoBehaviour
+public static class SpellFactory
 {
-    [SerializeField] private SpellObject spellObjectPrefab;
-    private static SpellFactory _instance;
-   
     private static readonly Dictionary<byte, Spell> _spells = new Dictionary<byte, Spell>();
     private static bool IsInitialized => _spells.Count > 0;
 
@@ -33,20 +30,8 @@ public class SpellFactory : MonoBehaviour
             return _spells;
         }
     }
-
-    private void Awake()
-    {
-        if (_instance == null)
-        {
-            _instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public static void InitializeFactory()
+    
+    private static void InitializeFactory()
     {
         Assembly typeAssembly = Assembly.GetAssembly(typeof(Spell));
         IEnumerable spellTypes = typeAssembly.GetTypes().Where(IsDerivedType<Spell>);
@@ -65,13 +50,29 @@ public class SpellFactory : MonoBehaviour
 
     private static Spell GetSpell(SpellElements spell)
     {
-        return Spells.ContainsKey((byte) spell) ? Spells[(byte) spell] : new GenericSpell();
+        Spell requestedSpell = null;
+            
+        if (Spells.ContainsKey((byte) spell))
+        {
+            Type spellType = Spells[(byte) spell].GetType();
+            requestedSpell = Activator.CreateInstance(spellType) as Spell;
+        }
+        
+        return requestedSpell ?? new DefaultSpell();
     }
 
-    public static SpellObject CreateSpellObject(SpellElements spell)
+    public static SpellObject CreateSpellObject(SpellElements spell, Vector3 position, Quaternion rotation)
     {
-        SpellObject newSpellObject = Instantiate(_instance.spellObjectPrefab);
-        newSpellObject.SetActiveSpell(GetSpell(spell));
+        Spell newSpell = GetSpell(spell);
+
+        SpellObject newSpellObject = SpellPool.AcquireSpellObject();
+        
+        Transform newSpellTransform = newSpellObject.transform;
+        newSpellTransform.position = position;
+        newSpellTransform.rotation = rotation;
+        
+        newSpellObject.Initiate(newSpell);
+        
         return newSpellObject;
     }
 }

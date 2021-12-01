@@ -1,36 +1,21 @@
-using System.Threading.Tasks;
 using UnityEngine;
 
-public class SpellObject : MonoBehaviour
+public class SpellObject : MonoBehaviour, IPoolable
 {
     private Spell _activeSpell;
-    private bool _isActive;
 
-    public void SetActiveSpell(Spell spell)
+    public void Initiate(Spell spell)
     {
         _activeSpell = spell;
-    }
-    private void Initiate(Vector3 position, Spell spell)
-    {
-        transform.position = position;
-        _activeSpell = spell;
-        Activate();
-    }
-    public void Activate()
-    {
-        _isActive = true;
-        _activeSpell.Activate(this);
-        _activeSpell.OnDeactivate += () => _isActive = false;
+        _activeSpell.Initiate(this);
+        
         print(_activeSpell.SpellMessage());
-        UpdateSpell();
+        
+        StartCoroutine(_activeSpell.Update());
     }
 
-    private async void UpdateSpell()
+    public void SetActive(bool active)
     {
-        while (Application.isPlaying && _isActive)
-        {
-            _activeSpell.Update();
-        }
-        print("Ended");
+        gameObject.SetActive(active);
     }
 }

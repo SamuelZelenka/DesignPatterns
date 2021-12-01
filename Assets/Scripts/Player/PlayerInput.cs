@@ -5,19 +5,21 @@ using UnityEngine.AI;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private ElementSelection elementSelection;
-    private HashSet<InputAction> _inputActions = new HashSet<InputAction>();
+    private readonly HashSet<InputAction> _inputActions = new HashSet<InputAction>();
 
     private void Start()
     {
         CreateInputKeys();
     }
+    
     void Update()
     {
         foreach (InputAction action in _inputActions)
         {
             action.CheckIfPressed();
-        } 
+        }
     }
+    
     private void CreateInputKeys()
     {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
@@ -29,7 +31,7 @@ public class PlayerInput : MonoBehaviour
          new SelectElementAction(2, KeyCode.Alpha3, elementSelection),
          new SelectElementAction(3, KeyCode.Alpha4, elementSelection),
          new ResetElementsAction(elementSelection),
-         new CastSpellAction(elementSelection, () => Input.GetMouseButtonDown(0))
+         new CastSpellAction(elementSelection, () => Input.GetMouseButtonDown(0), transform)
         };
 
         for (int i = 0; i < actions.Length; i++)

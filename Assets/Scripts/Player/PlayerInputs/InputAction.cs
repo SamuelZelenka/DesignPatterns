@@ -1,4 +1,3 @@
-using UnityEngine;
 public abstract class InputAction
 {
     protected abstract bool IsPressed { get; }
@@ -10,5 +9,4 @@ public abstract class InputAction
         }
     }
     protected abstract void Execute();
-    public virtual void RebindKey(KeyCode keycode) { }
 }
