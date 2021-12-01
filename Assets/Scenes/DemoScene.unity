@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellObjectPrefab: {fileID: 4935999834832060693, guid: a9e202b768ad9964dba978a81c0c0cc8, type: 3}
-  _capacity: 0
+  _capacity: 5
 --- !u!1 &237145937
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 public class SpellPool : MonoBehaviour
 {
     [SerializeField] private SpellObject spellObjectPrefab;
-    [SerializeField] private int _capacity;
+    [SerializeField] private int _capacity = 40;
 
     private static SpellPool _instance;
     public GameObjectPool<SpellObject> spellPool;
