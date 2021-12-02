@@ -71,7 +71,7 @@ public static class SpellFactory
         newSpellTransform.position = position;
         newSpellTransform.rotation = rotation;
         
-        newSpellObject.Initiate(newSpell);
+        newSpellObject.Initiate();
         
         return newSpellObject;
     }

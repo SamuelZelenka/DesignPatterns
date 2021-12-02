@@ -20,17 +20,21 @@ public abstract class Spell
         _castTime = Time.time;
     }
 
-    public virtual IEnumerator Update()
+    public IEnumerator Update()
     {
         while (_castTime + _duration > Time.time)
         {
-            Transform spellTransform = _spellObject.transform;
-            spellTransform.position += spellTransform.forward * _speed * Time.deltaTime;
+            ExecuteSpell();
             yield return null;
         }
         Disband();
     }
 
+    protected virtual void ExecuteSpell() 
+    {
+        Transform spellTransform = _spellObject.transform;
+        spellTransform.position += spellTransform.forward * _speed * Time.deltaTime;
+    }
     protected virtual void Disband()
     {
         SpellPool.ReleaseSpellObject(_spellObject);

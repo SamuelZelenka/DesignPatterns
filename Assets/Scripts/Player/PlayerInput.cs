@@ -11,7 +11,7 @@ public class PlayerInput : MonoBehaviour
     {
         CreateInputKeys();
     }
-    
+
     void Update()
     {
         foreach (InputAction action in _inputActions)
@@ -19,7 +19,7 @@ public class PlayerInput : MonoBehaviour
             action.CheckIfPressed();
         }
     }
-    
+
     private void CreateInputKeys()
     {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
