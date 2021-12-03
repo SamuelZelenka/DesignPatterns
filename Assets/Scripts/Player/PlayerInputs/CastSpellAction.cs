@@ -20,6 +20,7 @@ public class CastSpellAction : InputAction
         SpellElements selectedElements = (SpellElements)_elementSelection.SelectedElements;
         Vector3 spellPosition = playerTransform.position;
         Vector3 spellDirection =  PlayerInput.MouseClickPos() - spellPosition;
+        spellDirection = new Vector3(spellDirection.x, 0, spellDirection.z);
         Quaternion spellRotation = Quaternion.LookRotation(spellDirection, Vector3.up);
         
         SpellFactory.CreateSpellObject(selectedElements, spellPosition, spellRotation);

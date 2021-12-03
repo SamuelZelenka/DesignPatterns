@@ -7,7 +7,7 @@ public class SpellPool : MonoBehaviour
 
     private static SpellPool _instance;
     public GameObjectPool<SpellObject> spellPool;
-
+    
     private void Awake()
     {
         if (_instance == null)
@@ -20,6 +20,7 @@ public class SpellPool : MonoBehaviour
         }
         spellPool = new GameObjectPool<SpellObject>(spellObjectPrefab, transform);
         spellPool.capacity = _capacity;
+        
     }
 
     public static SpellObject AcquireSpellObject()

@@ -61,9 +61,9 @@ public static class SpellFactory
         return requestedSpell ?? new DefaultSpell();
     }
 
-    public static SpellObject CreateSpellObject(SpellElements spell, Vector3 position, Quaternion rotation)
+    public static SpellObject CreateSpellObject(SpellElements elements, Vector3 position, Quaternion rotation)
     {
-        Spell newSpell = GetSpell(spell);
+        Spell newSpell = GetSpell(elements);
 
         SpellObject newSpellObject = SpellPool.AcquireSpellObject();
         

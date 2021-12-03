@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4935999834832060693}
   - component: {fileID: 6901668962345683858}
   - component: {fileID: 3566724218250283003}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpellPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
