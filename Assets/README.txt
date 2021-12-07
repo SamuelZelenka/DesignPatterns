@@ -1,8 +1,8 @@
 Singleton:
 
-SpellFactory.cs:
-	Uses a singleton to allow a gameobject in the scene to hold a reference to a spellObjectPrefab.
-	could(should)
+SpellPool.cs
+The object pool for spells is a singleton as only one instance of the pool is required to acquire spell objects and also neatly keep them under the same transform in the scene hierarchy.
+This also allow the easy access to the prefab variable which can be assigned in the inspector.    
 
 -------------------
 
@@ -34,5 +34,12 @@ InputAction.cs / CastSpellAction.cs / MoveToPointAction.cs / ResetElementAction.
 
 Object pool
 
+GameObjectPool.cs / ObjectPool.cs / IPoolable.cs
+
+The object pool is a generic object pool written to be able to use any kind of class.
+To be able to create/destroy gameobjects in unity properly I've had to make a derived class called GameObjectPool.cs to utilize the instantiate() / Destroy() methods
+
+I've introduced a capacity to allow the pool to max out on stored inactive objects to free up on memory after an eventual spike in the number of game objects.
+I also allowed the option to prewarm the object pool if the game for some reason would halt mid game due to instantiation of too many new objects.
 	
 

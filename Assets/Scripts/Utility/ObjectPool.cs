@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine.PlayerLoop;
 
 public class ObjectPool<T> where T : new()
 {
@@ -16,8 +17,24 @@ public class ObjectPool<T> where T : new()
     {
         onCreate = () => new T();
     }
+    public ObjectPool(bool isWarmedUp)
+    {
+        onCreate = () => new T();
+        if (isWarmedUp)
+        {
+            Initialization(); 
+        }
+    }
 
     public ObjectPool(Func<T> createFunction) => onCreate = createFunction.Invoke;
+
+    protected void Initialization()
+    {
+        for (int i = 0; i < capacity; i++)
+        {
+            Release(onCreate.Invoke());
+        }
+    }
 
     public virtual T Acquire()
     {

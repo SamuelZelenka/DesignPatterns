@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WindGust : Spell
+public class WindGust : DefaultSpell
 {
     private const byte WINDGUST_RECIPE = (byte)(SpellElements.Air);
     private readonly Color32 _spellColor = new Color32(0xff, 0xff, 0xff, 0xFF);

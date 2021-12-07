@@ -20,12 +20,16 @@ public class GameObjectPool<T> : ObjectPool<T> where T : IPoolable, new()
         pool.Enqueue(releaseObject);
     }
 
-    public GameObjectPool(T prefab, Transform parent)
+    public GameObjectPool(T prefab, Transform parent, bool isWarmedUp)
     {
         onCreate = () =>
         {
             IPoolable newObject = Object.Instantiate(prefab.gameObject, parent).GetComponent<IPoolable>();
             return (T)newObject;
         };
+        if (isWarmedUp)
+        {
+            Initialization();
+        }
     }
 }

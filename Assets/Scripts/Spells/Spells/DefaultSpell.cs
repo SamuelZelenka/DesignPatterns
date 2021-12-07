@@ -15,5 +15,6 @@ public class DefaultSpell : Spell
     {
         base.Initiate(spellObject);
         _spellObject.GetComponent<MeshRenderer>().material.color = _spellColor;
+        spellObject.StartCoroutine(Update());
     }
 }

@@ -70,8 +70,8 @@ public static class SpellFactory
         Transform newSpellTransform = newSpellObject.transform;
         newSpellTransform.position = position;
         newSpellTransform.rotation = rotation;
-        
-        newSpellObject.Initiate();
+
+        newSpellObject.Initiate(newSpell);
         
         return newSpellObject;
     }

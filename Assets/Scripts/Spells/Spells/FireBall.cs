@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class FireBall : Spell
+public class FireBall : DefaultSpell
 {
     private const byte FIREBALL_RECIPE = (byte)(SpellElements.Fire);
     private readonly Color32 _spellColor = Color.red;
