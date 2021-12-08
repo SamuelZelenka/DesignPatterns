@@ -1,3 +1,16 @@
+Samuel Zelenka af Rolén
+
+A slimmed down version of the magicka spell system where you combine elements to create spells. 
+
+Spells are selected using the number keys 1-4 and can be reset with space.
+To cast a spell with the current configuration of elements use left-click
+
+to move the capsule(player) around right click in the scene
+
+The goal was to be able to implement a system that could easily make an object from a given configuration that is easily expandable. 
+
+-------------------
+
 Singleton:
 
 SpellPool.cs
@@ -9,7 +22,7 @@ This also allow the easy access to the prefab variable which can be assigned in 
 Factory Pattern:
 
 SpellFactory.cs:
-	Creates a SpellObject from specific arguments.
+	Creates a SpellObject from specific parameters. 
 
 -------------------
 
@@ -19,7 +32,6 @@ Spell.cs / EarthThrow.cs / FireBall.cs / DefaultSpell.cs / WaterSplash.cs / Wind
 	Spell contains a set of abstract and virtual properties and methods that are overriden in child classes
 	to allow flexbility in the behaviour of each derived class.
 
-(Also see PlayerInput.cs for initialization of the inputs)
 
 -------------------
 
@@ -28,6 +40,9 @@ Command Pattern:
 InputAction.cs / CastSpellAction.cs / MoveToPointAction.cs / ResetElementAction.cs / SelectElementAction.cs:
 	InputAction encapsulate the needed methods to be able to perform certain Actions at runtime.
 	in this case all calls happen within PlayerInput.cs Update method as the command is executed upon input in real time. 
+	
+	
+(Also see PlayerInput.cs for initialization of the inputs)
 
 -------------------
 
