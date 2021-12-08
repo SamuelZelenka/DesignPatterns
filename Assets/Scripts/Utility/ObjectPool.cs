@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine.PlayerLoop;
 
 public class ObjectPool<T> where T : new()
 {
@@ -38,24 +37,13 @@ public class ObjectPool<T> where T : new()
 
     public virtual T Acquire()
     {
-        T poolObject;
-
-        if (pool.Count > 0)
-        {
-            poolObject = pool.Dequeue();
-        }
-        else
-        {
-            poolObject = onCreate.Invoke();
-        }
-        return poolObject;
+        return pool.Count > 0 ? pool.Dequeue() : onCreate.Invoke();
     }
 
     public virtual void Release(T returnObject)
     {
         if (GetPoolSize() > capacity)
         {
-            returnObject = default;
             return;
         }
         pool.Enqueue(returnObject);

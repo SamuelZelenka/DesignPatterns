@@ -26,6 +26,7 @@ public class ElementSelection : MonoBehaviour
             {
                 Debug.LogWarning($"child '{child.name}' is not of type Image.");
             }
+            
             childIndex++;
         }
     }
@@ -45,7 +46,7 @@ public class ElementSelection : MonoBehaviour
             yOffset = IsElementSelected(index) ? -ELEMENT_UI_OFFSET : 0;
             _selectedElements -= elementToSet;
         }
-
+        
         MoveUIElementOnYAxis(index, yOffset);
     }
 
@@ -56,6 +57,7 @@ public class ElementSelection : MonoBehaviour
 
         return element == compareElement;
     }
+    
     public void DeselectAll()
     {
         for (int i = 0; i < _elements.Length; i++)
@@ -67,6 +69,7 @@ public class ElementSelection : MonoBehaviour
         }
         _selectedElements = 0;
     }
+    
     private void MoveUIElementOnYAxis(int index, float yOffset)
     {
         _elements[index].transform.position += new Vector3(0, yOffset, 0);

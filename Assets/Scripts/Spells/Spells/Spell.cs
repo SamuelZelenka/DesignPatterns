@@ -3,8 +3,6 @@ using UnityEngine;
 
 public abstract class Spell
 {
-    public delegate void SpellStateHandler();
-
     protected float _castTime;
     protected float _duration = 5;
     protected float _speed = 15;

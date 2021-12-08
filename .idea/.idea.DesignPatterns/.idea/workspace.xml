@@ -94,7 +94,7 @@
       <workItem from="1638374608899" duration="24000" />
       <workItem from="1638862788251" duration="11135000" />
       <workItem from="1638882044515" duration="644000" />
-      <workItem from="1638948102164" duration="554000" />
+      <workItem from="1638948102164" duration="1652000" />
     </task>
     <servers />
   </component>
@@ -106,24 +106,5 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Spells/SpellFactory.cs</url>
-          <line>73</line>
-          <properties documentPath="C:\Unity\Assignments\DesignPatterns\Assets\Scripts\Spells\SpellFactory.cs" initialLine="73" containingFunctionPresentation="method 'CreateSpellObject'">
-            <startOffsets>
-              <option value="1996" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2030" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

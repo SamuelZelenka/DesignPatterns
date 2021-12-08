@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class RingOfFire : Spell
 {
-    private const byte RINGOFFIRE_RECIPE = (byte)(SpellElements.Fire | SpellElements.Air);
+    private const byte RING_OF_FIRE_RECIPE = (byte)(SpellElements.Fire | SpellElements.Air);
     private const int FIREBALL_COUNT = 22;
     private const float RADIUS = 1;
 
-    public override byte SpellRecipe => RINGOFFIRE_RECIPE;
+    public override byte SpellRecipe => RING_OF_FIRE_RECIPE;
     public override string SpellMessage()
     {
         return "Cast RingOfFire";
