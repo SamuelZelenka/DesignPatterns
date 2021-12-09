@@ -5,7 +5,7 @@ public class DefaultSpell : Spell
     private readonly Color32 _spellColor = Color.gray;
     private Vector3 _clickedPos;
 
-    public override byte SpellRecipe { get; }
+    public override SpellElements SpellRecipe { get; }
     public override string SpellMessage()
     {
        return "Cast Generic Spell";

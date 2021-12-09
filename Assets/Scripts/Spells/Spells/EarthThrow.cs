@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EarthThrow : DefaultSpell
 {
-    private const byte EARTHTHROW_RECIPE = (byte)(SpellElements.Earth);
+    private const SpellElements EARTHTHROW_RECIPE = SpellElements.Earth;
     private readonly Color32 _spellColor = new Color32(0x4f, 0x38, 0x15, 0xFF);
 
-    public override byte SpellRecipe => EARTHTHROW_RECIPE;
+    public override SpellElements SpellRecipe => EARTHTHROW_RECIPE;
     public override string SpellMessage()
     {
         return "Cast EarthThrow";

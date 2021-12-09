@@ -16,10 +16,10 @@ public enum SpellElements
 
 public static class SpellFactory
 {
-    private static readonly Dictionary<byte, Spell> _spells = new Dictionary<byte, Spell>();
+    private static readonly Dictionary<SpellElements, Spell> _spells = new Dictionary<SpellElements, Spell>();
     private static bool IsInitialized => _spells.Count > 0;
 
-    private static Dictionary<byte, Spell> Spells
+    private static Dictionary<SpellElements, Spell> Spells
     {
         get
         {
@@ -52,9 +52,9 @@ public static class SpellFactory
     {
         Spell requestedSpell = null;
             
-        if (Spells.ContainsKey((byte) spell))
+        if (Spells.ContainsKey(spell))
         {
-            Type spellType = Spells[(byte) spell].GetType();
+            Type spellType = Spells[spell].GetType();
             requestedSpell = Activator.CreateInstance(spellType) as Spell;
         }
         

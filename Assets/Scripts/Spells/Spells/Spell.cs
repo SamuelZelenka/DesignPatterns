@@ -8,7 +8,7 @@ public abstract class Spell
     protected float _speed = 15;
     protected SpellObject _spellObject;
 
-    public abstract byte SpellRecipe { get; }
+    public abstract SpellElements SpellRecipe { get; }
     public abstract string SpellMessage();
 
     public virtual void Initiate(SpellObject spellObject)
