@@ -14,7 +14,7 @@ The goal was to be able to implement a system that could easily make an object f
 
 ## Singleton:
 
-###### SpellPool.cs
+	SpellPool.cs
 The object pool for spells is a singleton as only one instance of the pool is required to acquire spell objects and also neatly keep them under the same transform in the scene hierarchy.
 This also allow the easy access to the prefab variable which can be assigned in the inspector.    
 
@@ -22,25 +22,25 @@ This also allow the easy access to the prefab variable which can be assigned in 
 
 ## Factory Pattern:
 
-###### SpellFactory.cs:
-	Creates a SpellObject from specific parameters. 
+	SpellFactory.cs:
+Creates a SpellObject from specific parameters. 
 
 -------------------
 
 ## Strategy Pattern:
 
-###### Spell.cs / EarthThrow.cs / FireBall.cs / DefaultSpell.cs / WaterSplash.cs / WindGust.cs:
-	Spell contains a set of abstract and virtual properties and methods that are overriden in child classes
-	to allow flexbility in the behaviour of each derived class.
+	Spell.cs / EarthThrow.cs / FireBall.cs / DefaultSpell.cs / WaterSplash.cs / WindGust.cs:
+Spell contains a set of abstract and virtual properties and methods that are overriden in child classes
+to allow flexbility in the behaviour of each derived class.
 
 
 -------------------
 
 ## Command Pattern:
 
-###### InputAction.cs / CastSpellAction.cs / MoveToPointAction.cs / ResetElementAction.cs / SelectElementAction.cs:
-	InputAction encapsulate the needed methods to be able to perform certain Actions at runtime.
-	in this case all calls happen within PlayerInput.cs Update method as the command is executed upon input in real time. 
+	InputAction.cs / CastSpellAction.cs / MoveToPointAction.cs / ResetElementAction.cs / SelectElementAction.cs:
+InputAction encapsulate the needed methods to be able to perform certain Actions at runtime.
+in this case all calls happen within PlayerInput.cs Update method as the command is executed upon input in real time. 
 	
 	
 (Also see PlayerInput.cs for initialization of the inputs)
@@ -50,7 +50,7 @@ This also allow the easy access to the prefab variable which can be assigned in 
 
 ## Object pool
 
-###### GameObjectPool.cs / ObjectPool.cs / IPoolable.cs
+	GameObjectPool.cs / ObjectPool.cs / IPoolable.cs
 
 The object pool is a generic object pool written to be able to use any kind of class.
 To be able to create/destroy gameobjects in unity properly I've had to make a derived class called GameObjectPool.cs to utilize the instantiate() / Destroy() methods
