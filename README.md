@@ -23,7 +23,9 @@ This also allow the easy access to the prefab variable which can be assigned in 
 ## Factory Pattern:
 
 	SpellFactory.cs:
-Creates a SpellObject from specific parameters. 
+The spellfactory takes in an enum called SpellElements that is using the [Flags] attribute representing the selected elements to determine what elements are selected. 
+With the selected elements There's a pre-defined dictionary of spells and their recipes represented as a SpellElements value that is assigned to a SpellObject. 
+then the SpellObject is returned as an instance from the object pool.
 
 -------------------
 
@@ -52,7 +54,7 @@ in this case all calls happen within PlayerInput.cs Update method as the command
 
 	GameObjectPool.cs / ObjectPool.cs / IPoolable.cs
 
-The object pool is a generic object pool written to be able to use any kind of class.
+The object pool is a generic object pool written to be able to use any class.
 To be able to create/destroy gameobjects in unity properly I've had to make a derived class called GameObjectPool.cs to utilize the instantiate() / Destroy() methods
 
 I've introduced a capacity to allow the pool to max out on stored inactive objects to free up on memory after an eventual spike in the number of game objects.
