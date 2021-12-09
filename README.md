@@ -32,20 +32,19 @@ then the SpellObject is returned as an instance from the object pool.
 ## Strategy Pattern:
 
 	Spell.cs / EarthThrow.cs / FireBall.cs / DefaultSpell.cs / WaterSplash.cs / WindGust.cs:
-Spell contains a set of abstract and virtual properties and methods that are overriden in child classes
-to allow flexbility in the behaviour of each derived class.
+
+Using the strategy pattern for spells allows each spell to have unque behaviours by being able to override functionality in an abstract clas.
+Spell has an initiate method which is called upon creaton that is overriden to create unique behaviours for each ability.
 
 
 -------------------
 
 ## Command Pattern:
 
-	InputAction.cs / CastSpellAction.cs / MoveToPointAction.cs / ResetElementAction.cs / SelectElementAction.cs:
-InputAction encapsulate the needed methods to be able to perform certain Actions at runtime.
-in this case all calls happen within PlayerInput.cs Update method as the command is executed upon input in real time. 
-	
-	
-(Also see PlayerInput.cs for initialization of the inputs)
+	InputAction.cs / CastSpellAction.cs / MoveToPointAction.cs / ResetElementAction.cs / SelectElementAction.cs / PlayerInput.cs:
+InputAction is an abstract class that has an Execute() method that is called if the input is being pressed.
+
+PlayerInput.cs handles all initialization of the wanted inputs as well as it checks the input on Update() by iterating through all the InputActions that has been initialized.
 
 -------------------
 
@@ -55,8 +54,9 @@ in this case all calls happen within PlayerInput.cs Update method as the command
 	GameObjectPool.cs / ObjectPool.cs / IPoolable.cs
 
 The object pool is a generic object pool written to be able to use any class.
-To be able to create/destroy gameobjects in unity properly I've had to make a derived class called GameObjectPool.cs to utilize the instantiate() / Destroy() methods
 
-I've introduced a capacity to allow the pool to max out on stored inactive objects to free up on memory after an eventual spike in the number of game objects.
-I also allowed the option to prewarm the object pool if the game for some reason would halt mid game due to instantiation of too many new objects.
+GameObjectPool.cs is a derived class from ObjectPool to allow the usage of the instantiate() / Destroy() methods to properly handle Unity GameObjects.
+
+The object pool has a capacity to allow the pool to max out on stored inactive objects to free up on memory after an eventual spike in the number of game objects.
+There's also prewarm option for the object pool to create the capacity number of objects at start.
 	
